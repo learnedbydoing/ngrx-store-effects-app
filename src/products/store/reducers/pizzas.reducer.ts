@@ -33,10 +33,12 @@ export function reducer(
     }
 
     case fromPizzas.LOAD_PIZZAS_SUCCESS: {
+      const data = action.payload; //get data provided
       return {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
+        data //merge with current state
       }
     }
 
@@ -51,3 +53,9 @@ export function reducer(
 
   return state; // return `state` on first loading of all app when there is no action
 }
+
+export const getPizzasLoading = (state: PizzaState) => state.loading;
+export const getPizzasLoaded = (state: PizzaState) => state.loaded;
+export const getPizzas = (state: PizzaState) => state.data;
+//..these are small functions that get passed a small level of the PizzaState and at that point in time we are down in our data structures
+// => good practice to put such functions under our reducer
